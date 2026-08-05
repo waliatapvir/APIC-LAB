@@ -1,6 +1,6 @@
 ---
 - name: Create Cisco ACI Tenant
-  hosts: LAB_APIC
+  hosts: localhost
   gather_facts: false
   collections:
     - cisco.aci
@@ -14,3 +14,5 @@
         validate_certs: false
         tenant: "AWX_Inventory_Tenant"
         state: present
+        output_level: info
+      register: tenant_result
