@@ -6,7 +6,7 @@
     - cisco.aci
 
   tasks:
-    - name: Ensure the Tenant exists on Cisco APIC
+    - name: Ensure the Tenant exists on Cisco APIC LAB
       cisco.aci.aci_tenant:
         host: "{{ inventory_hostname }}"
         username: "{{ ansible_user }}"
