@@ -1,6 +1,6 @@
 ---
 - name: Create Cisco ACI Tenant
-  hosts: localhost
+  hosts: apic
   gather_facts: false
   collections:
     - cisco.aci
@@ -8,11 +8,15 @@
   tasks:
     - name: Ensure the Tenant exists on Cisco APIC LAB
       cisco.aci.aci_tenant:
-        host: "{{ inventory_hostname }}"
+        host: "{{ ansible_host }}"
         username: "{{ ansible_user }}"
         password: "{{ ansible_password }}"
-        validate_certs: false
-        tenant: "AWX_Inventory_Tenant"
-        state: present
-        output_level: info
+        validate_certs: "{{ aci_validate_certs }}"
+        tenant: "{{ tenant_name }}"
+        state: "{{ tenant_state }}"
+        output_level: "{{ aci_output_level }}"
       register: tenant_result
+
+    - name: Show tenant result
+      ansible.builtin.debug:
+        var: tenant_result

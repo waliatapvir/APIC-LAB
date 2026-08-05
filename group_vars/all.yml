@@ -1,0 +1,11 @@
+---
+# ACI connection defaults — non-secret values only
+# Secrets (ansible_user, ansible_password) are injected by Ansible Tower
+# via a "Machine" or custom "Network" credential — do NOT define them here
+
+aci_validate_certs: false
+aci_output_level: info
+
+# Tenant defaults
+tenant_name: AWX_Inventory_Tenant
+tenant_state: present
