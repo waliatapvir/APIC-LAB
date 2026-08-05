@@ -1,0 +1,16 @@
+---
+- name: Create Cisco ACI Tenant
+  hosts: LAB_APIC
+  gather_facts: false
+  collections:
+    - cisco.aci
+
+  tasks:
+    - name: Ensure the Tenant exists on Cisco APIC
+      cisco.aci.aci_tenant:
+        host: "{{ inventory_hostname }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        validate_certs: false
+        tenant: "AWX_Inventory_Tenant"
+        state: present
