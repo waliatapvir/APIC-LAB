@@ -1,3 +1,4 @@
 collections:
-  - name: cisco.aci
-    version: "2.13.0"
+  - name: cisco-aci-2.13.0.tar.gz
+    type: file
+  
