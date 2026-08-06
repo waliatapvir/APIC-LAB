@@ -1,4 +1,4 @@
 collections:
-  - name: /var/lib/awx/projects/_15__apic_lab/collections/cisco-aci-2.13.0.tar.gz
+  - name: ./cisco-aci-2.13.0.tar.gz
     type: file
   
