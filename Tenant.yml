@@ -12,7 +12,7 @@
         return_content: no
       register: galaxy_test
   
-- name: Show Galaxy connectivity result
+    - name: Show Galaxy connectivity result
       ansible.builtin.debug:
         var: galaxy_test
 
