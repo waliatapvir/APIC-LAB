@@ -1,4 +1,10 @@
 collections:
   - name: /var/lib/awx/projects/_15__apic_lab/collections/cisco-aci-2.13.0.tar.gz
     type: file
+
+  - name: /var/lib/awx/projects/_15__apic_lab/collections/ansible-netcommon-8.6.1.tar.gz
+    type: file
+
+  - name: /var/lib/awx/projects/_15__apic_lab/collections/ansible-utils-6.0.3.tar.gz
+    type: file
   
