@@ -1,9 +1,7 @@
 ---
 - name: Create Cisco ACI Tenant
-  hosts: LAB_APIC
+  hosts: all
   gather_facts: false
-  collections:
-    -cisco.aci
 
   tasks:
     - name: Ensure the Tenant exists on Cisco APIC LAB
