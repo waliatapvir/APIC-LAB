@@ -5,17 +5,6 @@
   collections:
     -cisco.aci
 
-  pre_tasks:
-    - name: Test Galaxy connectivity
-      ansible.builtin.uri:
-        url: https://galaxy.ansible.com
-        return_content: no
-      register: galaxy_test
-  
-    - name: Show Galaxy connectivity result
-      ansible.builtin.debug:
-        var: galaxy_test
-
   tasks:
     - name: Ensure the Tenant exists on Cisco APIC LAB
       cisco.aci.aci_tenant:
