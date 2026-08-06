@@ -1,6 +1,0 @@
----
-collections:
-  - name: cisco.aci
-    version:  "2.13.0"
-
-    ##requires ansible-core >= 2.16 Python >= 3.10
