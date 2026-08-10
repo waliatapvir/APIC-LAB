@@ -1,6 +1,6 @@
 ---
 - name: Create Cisco ACI Tenant
-  hosts: all
+  hosts: LAB_APIC
   gather_facts: false
 
   tasks:
