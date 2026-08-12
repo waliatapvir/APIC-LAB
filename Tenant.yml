@@ -1,10 +1,10 @@
 ---
-- name: Create Cisco ACI Tenant
+- name: Create Cisco ACI Tenant and Network Objects
   hosts: all
   gather_facts: false
 
   tasks:
-    - name: Ensure the Tenant exists on Cisco APIC LAB
+    - name: Create tenant
       cisco.aci.aci_tenant:
         host: "{{ ansible_host }}"
         username: "{{ ansible_user }}"
@@ -15,6 +15,77 @@
         output_level: "{{ aci_output_level }}"
       register: tenant_result
 
-    - name: Show tenant result
+    - name: Create VRF
+      cisco.aci.aci_vrf:
+        host: "{{ ansible_host }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        validate_certs: "{{ aci_validate_certs }}"
+        tenant: "{{ tenant_name }}"
+        vrf: "{{ vrf_name }}"
+        state: "{{ vrf_state }}"
+        output_level: "{{ aci_output_level }}"
+      register: vrf_result
+
+    - name: Create BD
+      cisco.aci.aci_bd:
+        host: "{{ ansible_host }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        validate_certs: "{{ aci_validate_certs }}"
+        tenant: "{{ tenant_name }}"
+        bd: "{{ bd_name }}"
+        vrf: "{{ vrf_name }}"
+        state: "{{ bd_state }}"
+        output_level: "{{ aci_output_level }}"
+      register: bd_result
+
+    - name: Create subnet
+      cisco.aci.aci_bd_subnet:
+        host: "{{ ansible_host }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        validate_certs: "{{ aci_validate_certs }}"
+        tenant: "{{ tenant_name }}"
+        bd: "{{ bd_name }}"
+        gateway: "{{ subnet_gateway }}"
+        scope: "{{ subnet_scope }}"
+        state: "{{ subnet_state }}"
+        output_level: "{{ aci_output_level }}"
+      register: subnet_result
+
+    - name: Create Application Profile
+      cisco.aci.aci_ap:
+        host: "{{ ansible_host }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        validate_certs: "{{ aci_validate_certs }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        state: "{{ ap_state }}"
+        output_level: "{{ aci_output_level }}"
+      register: ap_result
+
+    - name: Create EPG
+      cisco.aci.aci_epg:
+        host: "{{ ansible_host }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        validate_certs: "{{ aci_validate_certs }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        epg: "{{ epg_name }}"
+        bd: "{{ bd_name }}"
+        state: "{{ epg_state }}"
+        output_level: "{{ aci_output_level }}"
+      register: epg_result
+
+    - name: Show results
       ansible.builtin.debug:
-        var: tenant_result
+        msg:
+          tenant: "{{ tenant_result.current }}"
+          vrf: "{{ vrf_result.current }}"
+          bd: "{{ bd_result.current }}"
+          subnet: "{{ subnet_result.current }}"
+          ap: "{{ ap_result.current }}"
+          epg: "{{ epg_result.current }}"
