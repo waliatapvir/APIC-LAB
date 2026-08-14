@@ -11,22 +11,22 @@ tenant_name: AWX_Inventory_Tenant
 tenant_state: present
 
 # VRF
-vrf_name: vrf_name
+vrf_name: AWX_Test_Vrf
 vrf_state: present
 
 # Bridge Domain
-bd_name: bd_name
+bd_name: AWX_Test_BD
 bd_state: present
 
 # Subnet
-subnet_gateway: subnet_gateway    # e.g. 192.168.1.1/24
+subnet_gateway: 192.168.170.1/24    # e.g. 192.168.1.1/24
 subnet_scope: private                
 subnet_state: present
 
 # Application Profile
-ap_name: test_ap
+ap_name: AWX_Test_AP
 ap_state: present
 
 # Endpoint Group
-epg_name: test_epg
+epg_name: AWX_Test_EPG
 epg_state: present
